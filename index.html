@@ -122,7 +122,7 @@ h1,h2,h3,p{margin:0}
   overflow-wrap:break-word;
 }
 .section-copy{color:var(--text-muted);max-width:560px}
-.section-head{margin-bottom:var(--space-10)}
+.section-head{margin-bottom:var(--space-8)}
 .section-head .eyebrow{margin-bottom:var(--space-3)}
 .section-head .section-title{margin-bottom:var(--space-5)}
 [id]{scroll-margin-top:104px}
@@ -185,6 +185,16 @@ h1,h2,h3,p{margin:0}
 .logo span{color:var(--accent-fuchsia)}
 
 .nav-actions{display:flex;align-items:center;gap:var(--space-3)}
+
+/* Botón pin de ubicación (abre el mapa de las tiendas) */
+.nav-pin{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;color:var(--text-ink);
+  transition:background var(--t-fast),color var(--t-fast),transform var(--t-fast);
+}
+.nav-pin:hover{background:var(--bg-cream);color:var(--accent-fuchsia);transform:translateY(-1px)}
+.nav-pin:active{transform:translateY(0)}
+.nav-pin svg{width:21px;height:21px}
 
 .nav-cta{
   display:none;
@@ -250,7 +260,7 @@ h1,h2,h3,p{margin:0}
    ============================================================ */
 .hero{background:var(--bg-cream);overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1fr}
-.hero-content{padding:var(--space-16) var(--gutter) var(--space-12)}
+.hero-content{padding:var(--space-12) var(--gutter) var(--space-10)}
 .hero-content .eyebrow{margin-bottom:var(--space-4)}
 .hero-title{
   font-family:var(--serif);font-weight:400;
@@ -286,12 +296,12 @@ h1,h2,h3,p{margin:0}
 @media (min-width:900px){
   .hero-grid{
     grid-template-columns:1.05fr 1fr;
-    min-height:min(86vh,780px);
+    min-height:min(74vh,640px);
     padding-left:max(var(--gutter),calc((100% - var(--container)) / 2));
   }
   .hero-content{
     display:flex;flex-direction:column;justify-content:center;
-    padding:clamp(64px,8vw,112px) clamp(32px,4vw,64px) clamp(64px,8vw,112px) 0;
+    padding:clamp(48px,6vw,88px) clamp(32px,4vw,64px) clamp(48px,6vw,88px) 0;
   }
   .hero-media{aspect-ratio:auto;min-height:560px}
   .hero-media::after{inset:20px}
@@ -315,7 +325,7 @@ h1,h2,h3,p{margin:0}
 .benefits-grid{display:grid;grid-template-columns:1fr}
 .benefit{
   display:flex;align-items:center;gap:var(--space-4);
-  min-height:80px;padding:var(--space-5) 0;
+  min-height:72px;padding:var(--space-4) 0;
 }
 .benefit + .benefit{border-top:1px solid var(--border-subtle)}
 .benefit-icon{
@@ -326,7 +336,7 @@ h1,h2,h3,p{margin:0}
 
 @media (min-width:768px){
   .benefits-grid{grid-template-columns:repeat(3,1fr)}
-  .benefit{min-height:104px;padding:var(--space-6) var(--space-6);justify-content:center}
+  .benefit{min-height:88px;padding:var(--space-5) var(--space-6);justify-content:center}
   .benefit + .benefit{border-top:0;border-left:1px solid var(--border-subtle)}
   .benefit:first-child{padding-left:0}
   .benefit:last-child{padding-right:0}
@@ -335,7 +345,7 @@ h1,h2,h3,p{margin:0}
 /* ============================================================
    ESENCIA (historia)
    ============================================================ */
-.story{background:var(--bg-cream);padding:clamp(72px,10vw,128px) 0}
+.story{background:var(--bg-cream);padding:clamp(52px,7vw,88px) 0}
 .story-grid{display:grid;gap:clamp(32px,6vw,88px)}
 .story-images{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .story-figure{
@@ -352,7 +362,7 @@ h1,h2,h3,p{margin:0}
 @media (min-width:900px){
   .story-grid{grid-template-columns:.9fr 1.1fr;align-items:center}
   .story-images{gap:18px}
-  .story-figure:nth-child(2){margin-top:88px}
+  .story-figure:nth-child(2){margin-top:64px}
 }
 @media (max-width:479px){
   .story-figure:nth-child(2){margin-top:24px}
@@ -361,10 +371,10 @@ h1,h2,h3,p{margin:0}
 /* ============================================================
    COLECCIÓN
    ============================================================ */
-.collection{background:var(--bg-cream);padding:clamp(72px,10vw,128px) 0;border-top:1px solid var(--border-subtle)}
+.collection{background:var(--bg-cream);padding:clamp(52px,7vw,88px) 0;border-top:1px solid var(--border-subtle)}
 .collection-header{
   display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-5);
-  margin-bottom:var(--space-10);
+  margin-bottom:var(--space-8);
 }
 .collection-header .section-title{margin-top:var(--space-3)}
 .product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
@@ -414,13 +424,13 @@ h1,h2,h3,p{margin:0}
 /* ============================================================
    EDITORIAL
    ============================================================ */
-.editorial{background:var(--bg-surface);padding:clamp(72px,10vw,128px) 0;border-block:1px solid var(--border-subtle)}
+.editorial{background:var(--bg-surface);padding:clamp(52px,7vw,88px) 0;border-block:1px solid var(--border-subtle)}
 .editorial-grid{display:grid;gap:clamp(32px,5vw,72px)}
 .editorial-content .section-title{margin:var(--space-3) 0 var(--space-5);max-width:520px}
 .editorial-content .section-copy{margin-bottom:var(--space-8)}
 .editorial-figure{
   margin:0;overflow:hidden;background:var(--bg-sand);border-radius:2px;
-  aspect-ratio:4/5;max-height:600px;
+  aspect-ratio:4/5;max-height:520px;
 }
 .editorial-figure img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
 @media (min-width:900px){
@@ -430,10 +440,10 @@ h1,h2,h3,p{margin:0}
 /* ============================================================
    INSTAGRAM
    ============================================================ */
-.social{background:var(--bg-blush);padding:clamp(72px,10vw,128px) 0;text-align:center}
+.social{background:var(--bg-blush);padding:clamp(52px,7vw,88px) 0;text-align:center}
 .social .eyebrow{color:var(--accent-fuchsia-deep)}
 .social .section-title{margin:var(--space-3) auto var(--space-5);max-width:16ch}
-.social .section-copy{margin:0 auto var(--space-10);color:var(--text-ink)}
+.social .section-copy{margin:0 auto var(--space-8);color:var(--text-ink)}
 .instagram-grid{
   display:grid;grid-template-columns:repeat(2,1fr);gap:8px;
 }
@@ -477,8 +487,8 @@ h1,h2,h3,p{margin:0}
 /* ============================================================
    UBICACIONES
    ============================================================ */
-.locations{background:var(--bg-cream);padding:clamp(72px,10vw,128px) 0}
-.locations-grid{display:grid;gap:clamp(32px,4vw,56px)}
+.locations{background:var(--bg-cream);padding:clamp(52px,7vw,88px) 0}
+.locations-grid{display:grid;gap:clamp(16px,3vw,32px)}
 .map-frame{
   position:relative;aspect-ratio:16/10;
   border:1px solid var(--border-subtle);border-radius:4px;overflow:hidden;
@@ -513,7 +523,7 @@ h1,h2,h3,p{margin:0}
 /* ============================================================
    FOOTER
    ============================================================ */
-.footer{background:var(--bg-surface);border-top:1px solid var(--border-subtle);padding:clamp(56px,7vw,80px) 0 max(84px,calc(84px + env(safe-area-inset-bottom,0px)))}
+.footer{background:var(--bg-surface);border-top:1px solid var(--border-subtle);padding:clamp(44px,6vw,64px) 0 max(84px,calc(84px + env(safe-area-inset-bottom,0px)))}
 .footer-grid{display:grid;gap:var(--space-10)}
 .footer-brand .logo{display:inline-block;font-size:1.75rem;margin-bottom:var(--space-4)}
 .footer-brand p{color:var(--text-muted);font-size:.9375rem;max-width:300px}
@@ -719,6 +729,19 @@ html.js .locations-grid .store-block:nth-child(2){transition-delay:.12s}
 }
 .modal-close:hover{background:var(--bg-cream)}
 
+/* Variante: ventana con los dos mapas */
+.modal--maps{width:min(560px,100%);text-align:left;padding-top:clamp(28px,5vw,40px)}
+.modal--maps .modal-head{text-align:center;margin-bottom:var(--space-6)}
+.maps-stack{display:grid;gap:var(--space-6)}
+.map-embed{display:flex;flex-direction:column;gap:var(--space-2)}
+.map-embed-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+}
+.map-embed-head h3{font-family:var(--serif);font-size:1.0625rem;font-weight:400}
+.map-embed .map-frame{aspect-ratio:16/9}
+.map-embed .map-link{margin-top:0}
+.map-embed .btn{min-height:44px;padding:0 18px;font-size:.75rem}
+
 /* ============================================================
    REVEAL / MOTION
    ============================================================ */
@@ -756,6 +779,19 @@ html.js .reveal.is-visible{opacity:1;transform:none}
     </nav>
 
     <div class="nav-actions">
+      <button
+        class="nav-pin"
+        id="mapsBtn"
+        type="button"
+        aria-label="Ver las tiendas SAGA en el mapa"
+        aria-haspopup="dialog"
+        aria-controls="mapsModal"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21.2s-6.8-5.5-6.8-10.9a6.8 6.8 0 1 1 13.6 0c0 5.4-6.8 10.9-6.8 10.9z"/>
+          <circle cx="12" cy="10.2" r="2.5"/>
+        </svg>
+      </button>
       <a class="nav-cta" href="#esencia">Descubre SAGA&nbsp;↗</a>
       <button
         class="menu-toggle"
@@ -1006,61 +1042,37 @@ html.js .reveal.is-visible{opacity:1;transform:none}
         <span class="eyebrow">Visítanos</span>
         <h2 class="section-title">Encuentra tu SAGA más cercana</h2>
         <p class="section-copy">
-          Estamos en Maturín. Escríbenos por WhatsApp y con gusto te atendemos
-          en la sede que te quede más cerca.
+          Estamos en Maturín. Toca el pin 📍 de la barra superior o el botón
+          <em>Ver en el mapa</em> para abrir los mapas de nuestras dos sedes.
         </p>
       </div>
 
       <div class="locations-grid">
-        <div class="store-block reveal">
-          <div class="map-frame">
-            <iframe
-              src="https://www.google.com/maps?q=9.8027878,-63.2053880&z=16&hl=es&output=embed"
-              title="Mapa de la sede SAGA Servimas en C.C. Servimas Monterrey, Maturín"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=9.8027878,-63.2053880" target="_blank" rel="noopener">
-            Abrir C.C. Servimas Monterrey en Google Maps ↗
+        <article class="store-card reveal">
+          <span class="store-pin" aria-hidden="true">📍</span>
+          <h3>SAGA Servimas</h3>
+          <address>C.C. Servimas Monterrey<br />Avenida Alirio Ugarte Pelayo, Maturín</address>
+          <p class="store-badge">Venezuela 📍 · Shipping worldwide 🌐</p>
+          <a class="btn btn--fuchsia" href="https://wa.me/584249140219?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
+            WhatsApp ↗
           </a>
+          <button class="btn btn--outline" type="button" data-open-maps="0">
+            Ver en el mapa
+          </button>
+        </article>
 
-          <article class="store-card">
-            <span class="store-pin" aria-hidden="true">📍</span>
-            <h3>SAGA Servimas</h3>
-            <address>C.C. Servimas Monterrey<br />Avenida Alirio Ugarte Pelayo, Maturín</address>
-            <p class="store-badge">Venezuela 📍 · Shipping worldwide 🌐</p>
-            <a class="btn btn--fuchsia" href="https://wa.me/584249140219?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
-              WhatsApp ↗
-            </a>
-          </article>
-        </div>
-
-        <div class="store-block reveal">
-          <div class="map-frame">
-            <iframe
-              src="https://www.google.com/maps?q=9.746577,-63.184323&z=16&hl=es&output=embed"
-              title="Mapa de la sede SAGA Centro en el Sector Centro, diagonal a Plaza Ayacucho, Maturín"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=9.746577,-63.184323" target="_blank" rel="noopener">
-            Abrir Sector Centro en Google Maps ↗
+        <article class="store-card reveal">
+          <span class="store-pin" aria-hidden="true">📍</span>
+          <h3>SAGA Centro</h3>
+          <address>Sector Centro, diagonal a Plaza Ayacucho<br />Maturín, Monagas</address>
+          <p class="store-badge">Venezuela 📍 · Shipping worldwide 🌐</p>
+          <a class="btn btn--fuchsia" href="https://wa.me/584249305441?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
+            WhatsApp ↗
           </a>
-
-          <article class="store-card">
-            <span class="store-pin" aria-hidden="true">📍</span>
-            <h3>SAGA Centro</h3>
-            <address>Sector Centro, diagonal a Plaza Ayacucho<br />Maturín, Monagas</address>
-            <p class="store-badge">Venezuela 📍 · Shipping worldwide 🌐</p>
-            <a class="btn btn--fuchsia" href="https://wa.me/584249305441?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
-              WhatsApp ↗
-            </a>
-          </article>
-        </div>
+          <button class="btn btn--outline" type="button" data-open-maps="1">
+            Ver en el mapa
+          </button>
+        </article>
       </div>
     </div>
   </section>
@@ -1114,6 +1126,61 @@ html.js .reveal.is-visible{opacity:1;transform:none}
     <button class="btn btn--fuchsia btn--block" id="catalogModalOk" type="button">
       ¡Los espero!
     </button>
+  </div>
+</div>
+
+<!-- ================= MODAL MAPAS ================= -->
+<div class="modal-overlay" id="mapsModal" role="dialog" aria-modal="true" aria-labelledby="mapsModalTitle" hidden>
+  <div class="modal modal--maps">
+    <button class="modal-close" id="mapsModalClose" type="button" aria-label="Cerrar mapa">×</button>
+    <div class="modal-head">
+      <span class="modal-eyebrow">Visítanos</span>
+      <h2 id="mapsModalTitle">Nuestras tiendas</h2>
+    </div>
+
+    <div class="maps-stack">
+      <div class="map-embed" id="mapEmbed0">
+        <div class="map-embed-head">
+          <h3>SAGA Servimas</h3>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=9.8027878,-63.2053880" target="_blank" rel="noopener">
+            Abrir en Google Maps ↗
+          </a>
+        </div>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=9.8027878,-63.2053880&z=16&hl=es&output=embed"
+            title="Mapa de la sede SAGA Servimas en C.C. Servimas Monterrey, Maturín"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <a class="btn btn--fuchsia" href="https://wa.me/584249140219?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
+          WhatsApp Servimas ↗
+        </a>
+      </div>
+
+      <div class="map-embed" id="mapEmbed1">
+        <div class="map-embed-head">
+          <h3>SAGA Centro</h3>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=9.746577,-63.184323" target="_blank" rel="noopener">
+            Abrir en Google Maps ↗
+          </a>
+        </div>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=9.746577,-63.184323&z=16&hl=es&output=embed"
+            title="Mapa de la sede SAGA Centro en el Sector Centro, diagonal a Plaza Ayacucho, Maturín"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <a class="btn btn--fuchsia" href="https://wa.me/584249305441?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
+          WhatsApp Centro ↗
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1249,6 +1316,75 @@ html.js .reveal.is-visible{opacity:1;transform:none}
       /* foco atrapado dentro del modal */
       if (e.key === "Tab" && catalogModal.classList.contains("is-open")) {
         var focusables = catalogModal.querySelectorAll("button, a[href]");
+        var first = focusables[0];
+        var last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+    });
+  }
+
+  /* ---------- Modal mapas ---------- */
+  var mapsBtn = document.getElementById("mapsBtn");
+  var mapsModal = document.getElementById("mapsModal");
+  var mapsClose = document.getElementById("mapsModalClose");
+  var mapsLastFocus = null;
+
+  function setMapsModal(open, focusIndex) {
+    if (!mapsModal) return;
+    if (open) {
+      /* si el otro modal está abierto, lo cerramos primero */
+      var other = document.getElementById("catalogModal");
+      if (other && other.classList.contains("is-open")) {
+        other.classList.remove("is-open");
+        other.hidden = true;
+      }
+      mapsLastFocus = document.activeElement;
+      mapsModal.hidden = false;
+      void mapsModal.offsetWidth;
+      mapsModal.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      mapsClose.focus();
+      if (typeof focusIndex === "number") {
+        var target = document.getElementById("mapEmbed" + focusIndex);
+        if (target && target.scrollIntoView) target.scrollIntoView({ block: "nearest" });
+      }
+    } else {
+      mapsModal.classList.remove("is-open");
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      window.setTimeout(function () {
+        if (!mapsModal.classList.contains("is-open")) mapsModal.hidden = true;
+      }, 300);
+      if (mapsLastFocus && mapsLastFocus.focus) mapsLastFocus.focus();
+    }
+  }
+
+  if (mapsBtn && mapsModal) {
+    mapsBtn.addEventListener("click", function () { setMapsModal(true); });
+    mapsClose.addEventListener("click", function () { setMapsModal(false); });
+    mapsModal.addEventListener("click", function (e) {
+      if (e.target === mapsModal) setMapsModal(false);
+    });
+
+    var mapTriggers = document.querySelectorAll("[data-open-maps]");
+    Array.prototype.forEach.call(mapTriggers, function (btn) {
+      btn.addEventListener("click", function () {
+        setMapsModal(true, parseInt(btn.getAttribute("data-open-maps"), 10));
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!mapsModal.classList.contains("is-open")) return;
+      if (e.key === "Escape") {
+        setMapsModal(false);
+      }
+      if (e.key === "Tab") {
+        var focusables = mapsModal.querySelectorAll("button, a[href]");
         var first = focusables[0];
         var last = focusables[focusables.length - 1];
         if (e.shiftKey && document.activeElement === first) {
