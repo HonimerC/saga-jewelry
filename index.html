@@ -95,7 +95,7 @@ ul{margin:0;padding:0;list-style:none}
 h1,h2,h3,p{margin:0}
 :focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
 .on-dark :focus-visible{outline-color:var(--focus-dark)}
-.skip-link:focus-visible,.fab-wrap :focus-visible{outline-color:var(--focus-dark)}
+.skip-link:focus-visible{outline-color:var(--focus-dark)}
 
 .container{width:min(calc(100% - (2 * var(--gutter))),var(--container));margin-inline:auto}
 
@@ -238,17 +238,19 @@ h1,h2,h3,p{margin:0}
 .menu-toggle svg{width:22px;height:22px}
 
 .nav-links{display:none}
-.nav-links a{
+.nav-links a,.nav-links button{
   display:flex;align-items:center;min-height:48px;
   font-size:.8125rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
-  position:relative;
+  position:relative;background:none;border:0;color:inherit;cursor:pointer;
+  font-family:inherit;
 }
-.nav-links a::after{
+.nav-links a::after,.nav-links button::after{
   content:"";position:absolute;left:0;bottom:12px;height:1px;width:100%;
   background:var(--accent-fuchsia);transform:scaleX(0);transform-origin:left;
   transition:transform var(--t-base);
 }
-.nav-links a:hover::after,.nav-links a:focus-visible::after{transform:scaleX(1)}
+.nav-links a:hover::after,.nav-links a:focus-visible::after,
+.nav-links button:hover::after,.nav-links button:focus-visible::after{transform:scaleX(1)}
 
 /* Menú móvil: panel a todo el ancho del viewport (sin 100vw) */
 .nav-links.is-open{
@@ -260,8 +262,8 @@ h1,h2,h3,p{margin:0}
   padding:var(--space-2) var(--gutter) var(--space-4);
   z-index:70;
 }
-.nav-links.is-open a{min-height:52px;border-bottom:1px solid var(--border-subtle)}
-.nav-links.is-open li:last-child a{border-bottom:0}
+.nav-links.is-open a,.nav-links.is-open button{min-height:52px;border-bottom:1px solid var(--border-subtle);width:100%}
+.nav-links.is-open li:last-child a,.nav-links.is-open li:last-child button{border-bottom:0}
 
 @media (min-width:1024px){
   .nav-inner{min-height:88px}
@@ -272,8 +274,8 @@ h1,h2,h3,p{margin:0}
     display:flex;align-items:center;gap:var(--space-8);
     margin-inline:auto;
   }
-  .nav-links a{min-height:44px}
-  .nav-links a::after{bottom:8px}
+  .nav-links a,.nav-links button{min-height:44px}
+  .nav-links a::after,.nav-links button::after{bottom:8px}
 }
 
 /* ============================================================
@@ -334,9 +336,6 @@ h1,h2,h3,p{margin:0}
 }
 @media (max-width:359px){
   .product-grid{grid-template-columns:1fr}
-}
-@media (max-width:639px){
-  .store-card .btn{width:100%}
 }
 
 /* ============================================================
@@ -506,10 +505,8 @@ h1,h2,h3,p{margin:0}
 }
 
 /* ============================================================
-   UBICACIONES
+   MAPAS (ventana emergente)
    ============================================================ */
-.locations{background:var(--bg-cream);padding:clamp(52px,7vw,88px) 0}
-.locations-grid{display:grid;gap:clamp(16px,3vw,32px)}
 .map-frame{
   position:relative;aspect-ratio:16/10;
   border:1px solid var(--border-subtle);border-radius:4px;overflow:hidden;
@@ -523,28 +520,10 @@ h1,h2,h3,p{margin:0}
 }
 .map-link:hover{text-decoration:underline}
 
-.store-block{display:flex;flex-direction:column;gap:var(--space-4)}
-.store-card{
-  background:var(--bg-surface);border:1px solid var(--border-subtle);
-  border-radius:4px;padding:var(--space-6);
-  display:flex;flex-direction:column;gap:var(--space-2);
-}
-.store-pin{color:var(--accent-gold);font-size:1.25rem;line-height:1}
-.store-card h3{font-family:var(--serif);font-size:1.25rem;font-weight:400;margin-top:4px}
-.store-card address{font-style:normal;color:var(--text-muted);font-size:.9375rem}
-.store-badge{
-  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--text-ink);margin-top:4px;
-}
-.store-card .btn{margin-top:var(--space-4);align-self:flex-start;width:100%}
-@media (min-width:768px){
-  .locations-grid{grid-template-columns:1fr 1fr;align-items:start}
-}
-
 /* ============================================================
    FOOTER
    ============================================================ */
-.footer{background:var(--bg-surface);border-top:1px solid var(--border-subtle);padding:clamp(44px,6vw,64px) 0 max(84px,calc(84px + env(safe-area-inset-bottom,0px)))}
+.footer{background:var(--bg-surface);border-top:1px solid var(--border-subtle);padding:clamp(44px,6vw,64px) 0 24px}
 .footer-grid{display:grid;gap:var(--space-10)}
 .footer-brand .logo{display:inline-block;font-size:1.75rem;margin-bottom:var(--space-4)}
 .footer-brand p{color:var(--text-muted);font-size:.9375rem;max-width:300px}
@@ -562,12 +541,13 @@ h1,h2,h3,p{margin:0}
   color:var(--text-ink);margin:0 0 var(--space-5);
 }
 .footer-column li + li{margin-top:2px}
-.footer-column a,.footer-column span{
+.footer-column a,.footer-column button,.footer-column span{
   display:flex;align-items:center;min-height:44px;
   color:var(--text-muted);font-size:.9375rem;
+  background:none;border:0;font-family:inherit;text-align:left;padding:0;cursor:pointer;
   transition:color var(--t-fast);
 }
-.footer-column a:hover{color:var(--accent-fuchsia)}
+.footer-column a:hover,.footer-column button:hover{color:var(--accent-fuchsia)}
 .footer-bottom{
   display:flex;flex-wrap:wrap;gap:var(--space-4);
   align-items:center;justify-content:space-between;
@@ -590,30 +570,8 @@ h1,h2,h3,p{margin:0}
 }
 
 /* ============================================================
-   FAB WHATSAPP
+   PANELES DESPLEGABLES
    ============================================================ */
-.fab-wrap{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:90;pointer-events:none}
-.fab-wrap .fab,.fab-wrap .fab-panel{pointer-events:auto}
-.fab{
-  display:flex;align-items:center;justify-content:center;
-  width:56px;height:56px;border-radius:50%;
-  background:var(--accent-fuchsia);color:#fff;
-  box-shadow:var(--shadow-md);
-  transition:background var(--t-base),transform var(--t-base);
-}
-.fab:hover{background:var(--accent-fuchsia-deep);transform:scale(1.06)}
-.fab:active{transform:scale(.97)}
-.fab svg{width:28px;height:28px;fill:currentColor}
-.fab-panel{
-  position:absolute;right:0;bottom:calc(100% + 12px);
-  width:min(320px,calc(100vw - 40px));
-  background:var(--bg-surface);
-  border:1px solid var(--border-subtle);border-radius:4px;
-  box-shadow:var(--shadow-md);padding:8px;
-  display:none;
-  animation:panel-in 200ms ease-out;
-}
-.fab-panel.is-open{display:block}
 @keyframes panel-in{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
 .fab-panel-head{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
@@ -638,10 +596,6 @@ h1,h2,h3,p{margin:0}
 .wa-row svg{flex:none;width:24px;height:24px;fill:#25d366}
 .wa-row strong{display:block;font-size:.9375rem;font-weight:600;color:var(--text-ink);line-height:1.3}
 .wa-row span{display:block;font-size:.875rem;color:var(--text-muted);line-height:1.4}
-@media (max-width:479px){
-  .fab-wrap{right:16px;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:flex-end}
-  .fab-panel{width:100%}
-}
 
 /* ============================================================
    ANIMACIONES
@@ -672,7 +626,6 @@ html.js .instagram-grid .ig-item:nth-child(3){transition-delay:.12s}
 html.js .instagram-grid .ig-item:nth-child(4){transition-delay:.18s}
 html.js .instagram-grid .ig-item:nth-child(5){transition-delay:.24s}
 html.js .instagram-grid .ig-item:nth-child(6){transition-delay:.3s}
-html.js .locations-grid .store-block:nth-child(2){transition-delay:.12s}
 
 /* Brillo al pasar el botón */
 .btn{position:relative;overflow:hidden}
@@ -692,15 +645,6 @@ html.js .locations-grid .store-block:nth-child(2){transition-delay:.12s}
 
 /* Punto del logo respirando */
 .logo span{display:inline-block;animation:dot-breathe 3.4s ease-in-out infinite}
-
-/* Anillo pulsante en el botón de WhatsApp */
-.fab{position:relative}
-.fab::before{
-  content:"";position:absolute;inset:0;border-radius:50%;
-  border:2px solid rgba(194,24,102,.55);
-  animation:ring-out 2.8s ease-out infinite;pointer-events:none;
-}
-.fab:hover::before,.fab-panel.is-open ~ .fab::before{animation:none;opacity:0}
 
 /* ============================================================
    MODAL — Catálogo en construcción
@@ -773,7 +717,7 @@ html.js .reveal.is-visible{opacity:1;transform:none}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
   html.js .reveal{opacity:1;transform:none}
-  .btn:hover,.product-card:hover,.fab:hover,.ig-item:hover img,.product-card:hover .product-media img{transform:none}
+  .btn:hover,.product-card:hover,.ig-item:hover img,.product-card:hover .product-media img{transform:none}
 }
 </style>
 </head>
@@ -794,8 +738,9 @@ html.js .reveal.is-visible{opacity:1;transform:none}
         <li><a href="#esencia">Nuestra esencia</a></li>
         <li><a href="#coleccion">Colección</a></li>
         <li><a href="#inspiracion">Inspiración</a></li>
-        <li><a href="#ubicaciones">Tiendas</a></li>
-        <li><a href="#ubicaciones">Contacto</a></li>
+        <li>
+          <button type="button" data-open-maps aria-haspopup="dialog">Tiendas</button>
+        </li>
       </ul>
     </nav>
 
@@ -956,7 +901,7 @@ html.js .reveal.is-visible{opacity:1;transform:none}
           comodidad y autenticidad para que puedas usar tus piezas a tu
           manera.
         </p>
-        <a class="btn btn--outline" href="#ubicaciones" style="margin-top:8px">
+        <a class="btn btn--outline" href="#inspiracion" style="margin-top:8px">
           Descubrir nuestra historia
         </a>
         <p class="story-signature">Con amor, SAGA 🤍</p>
@@ -1089,47 +1034,6 @@ html.js .reveal.is-visible{opacity:1;transform:none}
     </div>
   </section>
 
-  <!-- ================= UBICACIONES ================= -->
-  <section class="locations" id="ubicaciones">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Visítanos</span>
-        <h2 class="section-title">Encuentra tu SAGA más cercana</h2>
-        <p class="section-copy">
-          Estamos en Maturín. Toca el pin 📍 de la barra superior o el botón
-          <em>Ver en el mapa</em> para abrir los mapas de nuestras dos sedes.
-        </p>
-      </div>
-
-      <div class="locations-grid">
-        <article class="store-card reveal">
-          <span class="store-pin" aria-hidden="true">📍</span>
-          <h3>SAGA Servimas</h3>
-          <address>C.C. Servimas Monterrey<br />Avenida Alirio Ugarte Pelayo, Maturín</address>
-          <p class="store-badge">Venezuela 📍 · Shipping worldwide 🌐</p>
-          <a class="btn btn--fuchsia" href="https://wa.me/584249140219?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
-            WhatsApp ↗
-          </a>
-          <button class="btn btn--outline" type="button" data-open-maps="0">
-            Ver en el mapa
-          </button>
-        </article>
-
-        <article class="store-card reveal">
-          <span class="store-pin" aria-hidden="true">📍</span>
-          <h3>SAGA Centro</h3>
-          <address>Sector Centro, diagonal a Plaza Ayacucho<br />Maturín, Monagas</address>
-          <p class="store-badge">Venezuela 📍 · Shipping worldwide 🌐</p>
-          <a class="btn btn--fuchsia" href="https://wa.me/584249305441?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
-            WhatsApp ↗
-          </a>
-          <button class="btn btn--outline" type="button" data-open-maps="1">
-            Ver en el mapa
-          </button>
-        </article>
-      </div>
-    </div>
-  </section>
 </main>
 
 <!-- ================= FOOTER ================= -->
@@ -1149,7 +1053,9 @@ html.js .reveal.is-visible{opacity:1;transform:none}
           <li><a href="#coleccion">Colección</a></li>
           <li><a href="#esencia">Nuestra esencia</a></li>
           <li><a href="#inspiracion">Inspiración</a></li>
-          <li><a href="#ubicaciones">Tiendas</a></li>
+          <li>
+            <button type="button" data-open-maps aria-haspopup="dialog">Tiendas</button>
+          </li>
         </ul>
       </div>
     </div>
@@ -1238,34 +1144,6 @@ html.js .reveal.is-visible{opacity:1;transform:none}
   </div>
 </div>
 
-<!-- ================= FAB WHATSAPP ================= -->
-<div class="fab-wrap">
-  <div class="fab-panel" id="fabPanel" role="dialog" aria-label="Opciones de WhatsApp" aria-modal="false">
-    <div class="fab-panel-head">
-      <span>Escríbenos por WhatsApp</span>
-      <button class="fab-close" id="fabClose" type="button" aria-label="Cerrar opciones de WhatsApp">×</button>
-    </div>
-    <a class="wa-row" href="https://wa.me/584249140219?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.16 1.73 2.64 4.2 3.7.59.26 1.04.41 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
-      <span>
-        <strong>SAGA Servimas</strong>
-        <span>+58 424-9140219</span>
-      </span>
-    </a>
-    <a class="wa-row" href="https://wa.me/584249305441?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.16 1.73 2.64 4.2 3.7.59.26 1.04.41 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
-      <span>
-        <strong>SAGA Centro</strong>
-        <span>+58 424-9305441</span>
-      </span>
-    </a>
-  </div>
-
-  <button class="fab" id="fabButton" type="button" aria-label="Abrir opciones de WhatsApp" aria-expanded="false" aria-controls="fabPanel">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm4.56 14.01c-.2.58-1.2 1.11-1.67 1.18-.42.06-.96.09-1.55-.1-.36-.11-.81-.26-1.4-.52-2.47-1.06-4.08-3.54-4.2-3.7-.12-.16-1-1.33-1-2.54s.64-1.8.86-2.05c.22-.25.49-.31.65-.31h.48c.15.01.36-.05.56.43.2.5.7 1.72.76 1.84.06.12.1.26.02.43-.08.16-.12.26-.25.41-.12.14-.26.32-.37.43-.13.12-.26.25-.11.5.14.25.64 1.06 1.38 1.72.94.84 1.74 1.11 1.99 1.23.25.12.4.1.54-.06.15-.17.63-.73.79-.97.17-.25.33-.21.56-.13.22.09 1.44.69 1.69.81.25.12.41.18.47.28.06.11.06.6-.15 1.18z"/></svg>
-  </button>
-</div>
-
 <script>
 (function () {
   "use strict";
@@ -1307,7 +1185,7 @@ html.js .reveal.is-visible{opacity:1;transform:none}
     });
 
     navLinks.addEventListener("click", function (e) {
-      if (e.target.closest("a")) setMenu(false);
+      if (e.target.closest("a, button")) setMenu(false);
     });
 
     document.addEventListener("keydown", function (e) {
@@ -1486,39 +1364,6 @@ html.js .reveal.is-visible{opacity:1;transform:none}
         } else if (!e.shiftKey && document.activeElement === last) {
           e.preventDefault(); first.focus();
         }
-      }
-    });
-  }
-
-  /* ---------- FAB WhatsApp ---------- */
-  var fabButton = document.getElementById("fabButton");
-  var fabPanel = document.getElementById("fabPanel");
-  var fabClose = document.getElementById("fabClose");
-
-  function setFab(open) {
-    fabPanel.classList.toggle("is-open", open);
-    fabButton.setAttribute("aria-expanded", String(open));
-    fabButton.setAttribute("aria-label", open ? "Cerrar opciones de WhatsApp" : "Abrir opciones de WhatsApp");
-    if (open) fabClose.focus();
-  }
-
-  if (fabButton && fabPanel) {
-    fabButton.addEventListener("click", function () {
-      setFab(!fabPanel.classList.contains("is-open"));
-    });
-    fabClose.addEventListener("click", function () {
-      setFab(false);
-      fabButton.focus();
-    });
-    document.addEventListener("click", function (e) {
-      if (fabPanel.classList.contains("is-open") && !e.target.closest(".fab-wrap")) {
-        setFab(false);
-      }
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && fabPanel.classList.contains("is-open")) {
-        setFab(false);
-        fabButton.focus();
       }
     });
   }
