@@ -196,6 +196,27 @@ h1,h2,h3,p{margin:0}
 .nav-pin:active{transform:translateY(0)}
 .nav-pin svg{width:21px;height:21px}
 
+/* Botón WhatsApp en la barra superior (panel con los 2 números) */
+.nav-wa-wrap{position:relative}
+.nav-wa{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;color:var(--text-ink);
+  transition:background var(--t-fast),color var(--t-fast),transform var(--t-fast);
+}
+.nav-wa:hover{background:var(--bg-cream);color:var(--accent-fuchsia);transform:translateY(-1px)}
+.nav-wa:active{transform:translateY(0)}
+.nav-wa svg{width:21px;height:21px;fill:currentColor}
+.nav-wa-panel{
+  position:absolute;top:calc(100% + 10px);right:0;
+  width:min(300px,calc(100vw - 40px));
+  background:var(--bg-surface);
+  border:1px solid var(--border-subtle);border-radius:4px;
+  box-shadow:var(--shadow-md);padding:8px;
+  display:none;z-index:80;
+  animation:panel-in 200ms ease-out;
+}
+.nav-wa-panel.is-open{display:block}
+
 .nav-cta{
   display:none;
   font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
@@ -779,6 +800,39 @@ html.js .reveal.is-visible{opacity:1;transform:none}
     </nav>
 
     <div class="nav-actions">
+      <div class="nav-wa-wrap">
+        <button
+          class="nav-wa"
+          id="navWaBtn"
+          type="button"
+          aria-label="Escríbenos por WhatsApp"
+          aria-expanded="false"
+          aria-controls="navWaPanel"
+          aria-haspopup="dialog"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm4.56 14.01c-.2.58-1.2 1.11-1.67 1.18-.42.06-.96.09-1.55-.1-.36-.11-.81-.26-1.4-.52-2.47-1.06-4.08-3.54-4.2-3.7-.12-.16-1-1.33-1-2.54s.64-1.8.86-2.05c.22-.25.49-.31.65-.31h.48c.15.01.36-.05.56.43.2.5.7 1.72.76 1.84.06.12.1.26.02.43-.08.16-.12.26-.25.41-.12.14-.26.32-.37.43-.13.12-.26.25-.11.5.14.25.64 1.06 1.38 1.72.94.84 1.74 1.11 1.99 1.23.25.12.4.1.54-.06.15-.17.63-.73.79-.97.17-.25.33-.21.56-.13.22.09 1.44.69 1.69.81.25.12.41.18.47.28.06.11.06.6-.15 1.18z"/></svg>
+        </button>
+        <div class="nav-wa-panel" id="navWaPanel" role="dialog" aria-label="Números de WhatsApp de SAGA" hidden>
+          <div class="fab-panel-head">
+            <span>Escríbenos por WhatsApp</span>
+            <button class="fab-close" id="navWaClose" type="button" aria-label="Cerrar opciones de WhatsApp">×</button>
+          </div>
+          <a class="wa-row" href="https://wa.me/584249140219?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm4.56 14.01c-.2.58-1.2 1.11-1.67 1.18-.42.06-.96.09-1.55-.1-.36-.11-.81-.26-1.4-.52-2.47-1.06-4.08-3.54-4.2-3.7-.12-.16-1-1.33-1-2.54s.64-1.8.86-2.05c.22-.25.49-.31.65-.31h.48c.15.01.36-.05.56.43.2.5.7 1.72.76 1.84.06.12.1.26.02.43-.08.16-.12.26-.25.41-.12.14-.26.32-.37.43-.13.12-.26.25-.11.5.14.25.64 1.06 1.38 1.72.94.84 1.74 1.11 1.99 1.23.25.12.4.1.54-.06.15-.17.63-.73.79-.97.17-.25.33-.21.56-.13.22.09 1.44.69 1.69.81.25.12.41.18.47.28.06.11.06.6-.15 1.18z"/></svg>
+            <span>
+              <strong>SAGA Servimas</strong>
+              <span>+58 424-9140219</span>
+            </span>
+          </a>
+          <a class="wa-row" href="https://wa.me/584249305441?text=Hola%20SAGA%2C%20escribo%20desde%20su%20p%C3%A1gina" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm4.56 14.01c-.2.58-1.2 1.11-1.67 1.18-.42.06-.96.09-1.55-.1-.36-.11-.81-.26-1.4-.52-2.47-1.06-4.08-3.54-4.2-3.7-.12-.16-1-1.33-1-2.54s.64-1.8.86-2.05c.22-.25.49-.31.65-.31h.48c.15.01.36-.05.56.43.2.5.7 1.72.76 1.84.06.12.1.26.02.43-.08.16-.12.26-.25.41-.12.14-.26.32-.37.43-.13.12-.26.25-.11.5.14.25.64 1.06 1.38 1.72.94.84 1.74 1.11 1.99 1.23.25.12.4.1.54-.06.15-.17.63-.73.79-.97.17-.25.33-.21.56-.13.22.09 1.44.69 1.69.81.25.12.41.18.47.28.06.11.06.6-.15 1.18z"/></svg>
+            <span>
+              <strong>SAGA Centro</strong>
+              <span>+58 424-9305441</span>
+            </span>
+          </a>
+        </div>
+      </div>
       <button
         class="nav-pin"
         id="mapsBtn"
@@ -1324,6 +1378,46 @@ html.js .reveal.is-visible{opacity:1;transform:none}
           e.preventDefault(); first.focus();
         }
       }
+    });
+  }
+
+  /* ---------- Panel WhatsApp en la barra superior ---------- */
+  var navWaBtn = document.getElementById("navWaBtn");
+  var navWaPanel = document.getElementById("navWaPanel");
+  var navWaClose = document.getElementById("navWaClose");
+
+  function setNavWa(open) {
+    if (!navWaPanel || !navWaBtn) return;
+    navWaPanel.classList.toggle("is-open", open);
+    navWaPanel.hidden = !open;
+    navWaBtn.setAttribute("aria-expanded", String(open));
+    if (open) {
+      var firstRow = navWaPanel.querySelector(".wa-row");
+      if (firstRow) firstRow.focus();
+    }
+  }
+
+  if (navWaBtn && navWaPanel) {
+    navWaBtn.addEventListener("click", function () {
+      setNavWa(!navWaPanel.classList.contains("is-open"));
+    });
+    navWaClose.addEventListener("click", function () {
+      setNavWa(false);
+      navWaBtn.focus();
+    });
+    document.addEventListener("click", function (e) {
+      if (navWaPanel.classList.contains("is-open") && !e.target.closest(".nav-wa-wrap")) {
+        setNavWa(false);
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && navWaPanel.classList.contains("is-open")) {
+        setNavWa(false);
+        navWaBtn.focus();
+      }
+    });
+    Array.prototype.forEach.call(navWaPanel.querySelectorAll(".wa-row"), function (row) {
+      row.addEventListener("click", function () { setNavWa(false); });
     });
   }
 
